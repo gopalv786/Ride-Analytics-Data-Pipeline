@@ -12,7 +12,7 @@ permissions:
 env:
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   GCS_BUCKET_NAME: ${{ secrets.GCS_BUCKET_NAME || 'ride-analytics' }}
-  DATAPROC_CLUSTER_NAME: ${{ secrets.DATAPROC_CLUSTER_NAME || 'hadoop-dev-new' }}
+  DATAPROC_CLUSTER_NAME: ${{ secrets.DATAPROC_CLUSTER_NAME || 'hadoop-dev' }}
   COMPOSER_ENVIRONMENT: ${{ secrets.COMPOSER_ENVIRONMENT || 'airflow-dev' }}
   COMPOSER_REGION: ${{ secrets.COMPOSER_REGION || 'us-central1' }}
   CLOUD_RUN_SERVICE_NAME: ${{ secrets.CLOUD_RUN_SERVICE_NAME || 'ride-analytics-api' }}
@@ -29,8 +29,8 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
-          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
-          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER || 'projects/380160112497/locations/global/workloadIdentityPools/github-pool/providers/Github-OIDC-Provider' }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT || '380160112497-compute@developer.gserviceaccount.com'}}
       
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
