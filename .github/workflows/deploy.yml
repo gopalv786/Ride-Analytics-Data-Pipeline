@@ -37,7 +37,7 @@ jobs:
       
       - name: Set GCP project
         run: |
-          gcloud config set project ${{ env.GCP_PROJECT_ID }}
+          gcloud config set project $GCP_PROJECT_ID
       
       - name: Verify GCS bucket exists
         run: |
